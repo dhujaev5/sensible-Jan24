@@ -1,1 +1,39 @@
-   
+- name: install  Apache
+  apt:
+    name: apache2
+    state: latest
+
+- name: Make sure a service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: apache2
+
+- name: Download foo.conf
+  get_url:
+    url: https://www.free-css.com/assets/files/free-css-templates/download/page292/grandcoffee.zip
+    dest: /tmp/grandcoffee.zip
+
+- name: install unzip
+  apt:
+    name: unzip
+    state: latest
+
+- name: Extract /tmp/grandcoffee.zip, unzip
+  unarchive:
+    src: /tmp/grandcoffee.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: move unzipped picture to dest
+  shell: "mv /tmp/html/* /var/www/html/"
+  args:
+    creates: /var/www/html/index.html 
+
+- name: give insecure permissions to an existing file
+  file:
+    path: /var/www/html
+    owner: apache
+    group: apache
+    recurse: yes
+       

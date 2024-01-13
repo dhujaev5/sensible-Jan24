@@ -1,0 +1,6 @@
+[centos]
+centos1    ansible_host=ip address
+
+
+[ubuntu]
+ubuntu1    ansible_host= ip address
