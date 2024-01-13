@@ -9,3 +9,16 @@ Create playbooks which will automatically run below tasks
  over public IP.
  Create a new github repository
  once playbooks are ready push them to github repository 
+
+ Solutions:
+ 1. (3 playbooks)
+    main.yaml
+    include: RedHat.yml 
+    include: Debian.yml 
+
+ 2. Single playbook
+    main.yml 
+    task 1
+    -when :ansible_os_family=='RedHat' 
+    task 2
+    -when :ansible_os_family=='Debian'  
