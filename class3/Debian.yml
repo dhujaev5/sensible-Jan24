@@ -31,9 +31,5 @@
     creates: /var/www/html/index.html 
 
 - name: give insecure permissions to an existing file
-  file:
-    path: /var/www/html
-    owner: apache
-    group: apache
-    recurse: yes
+
        
