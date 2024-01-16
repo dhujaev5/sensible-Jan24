@@ -1,0 +1,19 @@
+- hosts: all
+  handlers:
+  - name: restart httpd
+    systemd:
+      state : restarted
+      enabled: yes
+      name: httpd
+
+
+  tasks:
+  - name: update httpd config
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^#Servername*'
+      line: "ServerName mycompany.com:80"
+    notify: restart httpd
+
+  //notify call the handler from the top!  
+   

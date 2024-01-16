@@ -1,0 +1,21 @@
+-hosts: all
+ tasks:
+ - name: update httpd config
+   lineinfile:
+     path: /etc/httpd/conf/httpd.conf
+     regexp: '^#Servername*'
+     line: "ServerName mycompany.com:80"
+   register: config_status 
+
+ - debug:
+     msg: "{{ config_status}}"
+//debug is used to find changed and status of the result.
+
+ - systemd:
+     state : restarted
+     enabled: yes
+     name: httpd
+   when: config_status.changed == true
+
+// go to machine, egrep "^ServerName" /etc/httpd/conf/httpd.conf
+//ansible-playbook -i hosts main.yaml
