@@ -16,4 +16,7 @@
     notify: restart httpd
 
   //notify call the handler from the top!  
-   
+  // we can type 
+  //  - tasks 
+  //    notify: restart httpd
+  //this is different version of example4.
